@@ -10,14 +10,11 @@ class Node {
 	prev = nullptr;
 	next = nullptr;
   }
-
 };
 
 template<typename T>
 class LinkedList {
-
  public:
-
   LinkedList() {
 	head = nullptr;
 	tail = nullptr;
