@@ -1,3 +1,10 @@
+//
+// Created by ray on 18.11.2024.
+//
+
+#ifndef LINKED_LIST__LINKEDLIST_H_
+#define LINKED_LIST__LINKEDLIST_H_
+
 #include <iostream>
 template<typename T>
 class Node {
@@ -136,11 +143,4 @@ class LinkedList {
   size_t size_;
 };
 
-int main() {
-
-  LinkedList<double> my_list;
-  my_list.push_back(3.2);
-  my_list.push_back(3.14);
-
-  int i = 0;
-}
+#endif //LINKED_LIST__LINKEDLIST_H_
