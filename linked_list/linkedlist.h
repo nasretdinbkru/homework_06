@@ -28,7 +28,7 @@ class LinkedList {
 	size_ = 0;
   }
 
-  Node<T>* push_front(T data) {
+  Node<T>* pushFront(T data) {
 	T* ptr = new T(data);
 	ptr->next = head;
 	if (head != nullptr) {
@@ -41,7 +41,7 @@ class LinkedList {
 	size_++;
 	return ptr;
   }
-  Node<T>* push_back(T data) {
+  Node<T>* pushBack(T data) {
 	auto* ptr = new Node<T>(data);
 	ptr->prev = tail;
 	if (tail != nullptr) {
@@ -54,7 +54,7 @@ class LinkedList {
 	size_++;
 	return ptr;
   }
-  void pop_front() {
+  void popFront() {
 	if (head == nullptr) return;
 	auto* ptr = head->next;
 	if (ptr != nullptr) {
@@ -67,7 +67,7 @@ class LinkedList {
 	head = ptr;
   }
 
-  void pop_back() {
+  void popBack() {
 	if (tail == nullptr) return;
 	T* ptr = tail->prev;
 	if (ptr != nullptr) {
@@ -97,11 +97,11 @@ class LinkedList {
   Node<T>* insert(uint32_t index, T data) {
 	Node<T>* right = getAt(index);
 	if (right == nullptr) {
-	  return push_back(data);
+	  return pushBack(data);
 	}
 	Node<T>* left = right->prev;
 	if (left == nullptr) {
-	  return push_front(data);
+	  return pushFront(data);
 	}
 	Node<T>* ptr = new T(data);
 	ptr->prev = left;
@@ -115,11 +115,11 @@ class LinkedList {
 	Node<T>* ptr = getAt(index);
 	if (ptr == nullptr) return;
 	if (ptr->prev == nullptr) {
-	  pop_front();
+	  popFront();
 	  return;
 	}
 	if (ptr->next == nullptr) {
-	  pop_back();
+	  popBack();
 	  return;
 	}
 	Node<T>* left = ptr->prev;
@@ -131,7 +131,7 @@ class LinkedList {
   }
   ~LinkedList() {
 	while (head != nullptr) {
-	  pop_front();
+	  popFront();
 	}
   }
   size_t size() {

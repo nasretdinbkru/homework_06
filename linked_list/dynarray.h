@@ -27,11 +27,11 @@ class Vector {
 	  elements[i] = value;
 	}
   }
-  Vector(const Vector& rhs){
+  Vector(const Vector& rhs) {
 	size = rhs.size;
-	capacity= rhs.capacity;
+	capacity = rhs.capacity;
 	elements = new T[capacity];
-	for (int i = 0; i < rhs.size; i++){
+	for (int i = 0; i < rhs.size; i++) {
 	  elements[i] = rhs.elements[i];
 	}
   }
@@ -39,13 +39,13 @@ class Vector {
 	delete[] elements;
   }
 
-  [[nodiscard]] int Size() const{
+  [[nodiscard]] int Size() const {
 	return size;
   }
-  [[nodiscard]] int Capacity() const{
+  [[nodiscard]] int Capacity() const {
 	return capacity;
   }
-  [[nodiscard]] bool IsEmpty() const{
+  [[nodiscard]] bool IsEmpty() const {
 	return size == 0;
   }
   T& operator[](int index) {
@@ -54,12 +54,23 @@ class Vector {
   const T& operator[](int index) const {
 	return elements[index];
   }
-  Vector& operator=(const Vector& other);
+  Vector& operator=(const Vector& rhs) {
+	if (rhs.size > size) {
+	  delete[] elements;
+	  capacity = rhs.size * 2;
+	  elements = new T[capacity];
+	}
+	for (int i = 0; i < rhs.size; i++) {
+	  elements[i] = rhs.elements[i];
+	}
+	size = rhs.size;
+	return *this;
+  }
 
-  void PushBack(const T& object) {
-	if (size == capacity){
-	  T* newarr = new  T[capacity * 2];
-	  for (int i = 0; i < size; i++){
+  void pushBack(const T& object) {
+	if (size == capacity) {
+	  T* newarr = new T[capacity * 2];
+	  for (int i = 0; i < size; i++) {
 		newarr[i] = elements[i];
 	  }
 	  delete[] elements;
@@ -69,19 +80,44 @@ class Vector {
 	elements[size] = object;
 	size++;
   }
-  void PopBack() {
+  void popBack() {
+	if (size > 0) {
+	  size--;
+	}
 
   }
-  void Erase(int index) {
+  void erase(int index) {
+	for (int i = index; i < size - 1; i++) {
+	  elements[i] = elements[i + 1];
+	}
+	size--;
 
   }
-  void Clear() {
+  void clear() {
+	size = 0;
 
   }
-  void Insert(int index, T value) {
 
+  void insert(int index, const T value) {
+	Vector<T> tmp;
+
+	for (int i = 0; i < size; i++) {
+	  if (i != index) {
+		tmp.pushBack(elements[i]);
+
+	  } else {
+		tmp.pushBack(value);
+		tmp.pushBack(elements[i]);
+	  }
+	}
+	size++;
+	capacity++;
+	delete[] elements;
+	elements = new T[size];
+	for (int i = 0; i < tmp.size; i++) {
+	  elements[i] = tmp.elements[i];
+	}
   }
-
 };
 
 #endif //CONTAINERS__DYNARRAY_H_
