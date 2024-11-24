@@ -4,11 +4,10 @@
 #include "linkedlist.h"
 #include "dynarray.h"
 
-
 void printVector(Vector<double>& vector) {
   for (int i = 0; i < vector.Size(); i++) {
 	std::string endline = ", ";
-	if (i == vector.Size() -1 )
+	if (i == vector.Size() - 1)
 	  endline = "";
 	std::cout << vector[i] << endline;
   }
@@ -18,22 +17,17 @@ void printVector(Vector<double>& vector) {
 void printList(LinkedList<int>& list) {
   for (int i = 0; i < list.size(); i++) {
 	std::string endline = ", ";
-	if (i == list.size() -1 )
+	if (i == list.size() - 1)
 	  endline = "";
 	std::cout << list.getAt(i)->data << endline;
   }
   std::cout << std::endl;
 }
 
-
-
-
-
-
 int main() {
 
   LinkedList<int> my_list;
-  for (int i = 0; i <= 9; i++ ){
+  for (int i = 0; i <= 9; i++) {
 	my_list.pushBack(i);
   }
   std::cout << "=== Linked List ===\n";
@@ -53,9 +47,8 @@ int main() {
 
   std::cout << "=== Primitive Vector ===\n";
 
-
   Vector<double> vec;
-  for (int i = 0; i <= 9; i++){
+  for (int i = 0; i <= 9; i++) {
 	vec.pushBack(i);
   }
   printVector(vec);
@@ -66,7 +59,7 @@ int main() {
   printVector(vec);
   vec.insert(0, 10);
   printVector(vec);
-  vec.insert(4,20);
+  vec.insert(4, 20);
   printVector(vec);
   vec.pushBack(30);
   printVector(vec);
