@@ -27,9 +27,8 @@ class LinkedList {
 	tail = nullptr;
 	size_ = 0;
   }
-
   Node<T>* pushFront(T data) {
-	T* ptr = new T(data);
+	auto* ptr = new Node<T>(data);
 	ptr->next = head;
 	if (head != nullptr) {
 	  head->prev = ptr;
@@ -45,12 +44,13 @@ class LinkedList {
 	auto* ptr = new Node<T>(data);
 	ptr->prev = tail;
 	if (tail != nullptr) {
-	  tail->prev = ptr;
+	  tail->next = ptr;
 	}
 	if (head == nullptr) {
 	  head = ptr;
 	}
 	tail = ptr;
+
 	size_++;
 	return ptr;
   }
@@ -69,7 +69,7 @@ class LinkedList {
 
   void popBack() {
 	if (tail == nullptr) return;
-	T* ptr = tail->prev;
+	Node<T>* ptr = tail->prev;
 	if (ptr != nullptr) {
 	  ptr->next = nullptr;
 	} else {
@@ -79,9 +79,9 @@ class LinkedList {
 	size_--;
 	tail = ptr;
   }
-  Node<T>* getAt(uint32_t index) const {
+  Node<T>* getAt(int index) const {
 	Node<T>* ptr = head;
-	uint32_t n = 0;
+	int n = 0;
 	while (n != index) {
 	  if (ptr == nullptr) {
 		return ptr;
@@ -91,10 +91,10 @@ class LinkedList {
 	}
 	return ptr;
   }
-  Node<T>* operator[](uint32_t index) const {
+  Node<T>* operator[](int index) const {
 	return getAt(index);
   }
-  Node<T>* insert(uint32_t index, T data) {
+  Node<T>* insert(int index, T data) {
 	Node<T>* right = getAt(index);
 	if (right == nullptr) {
 	  return pushBack(data);
@@ -103,7 +103,7 @@ class LinkedList {
 	if (left == nullptr) {
 	  return pushFront(data);
 	}
-	Node<T>* ptr = new T(data);
+	Node<T>* ptr = static_cast<Node<int>*>(new Node<T>(data));
 	ptr->prev = left;
 	ptr->next = right;
 	left->next = ptr;
@@ -111,7 +111,7 @@ class LinkedList {
 	size_++;
 	return ptr;
   }
-  void erase(uint32_t index) {
+  void erase(int index) {
 	Node<T>* ptr = getAt(index);
 	if (ptr == nullptr) return;
 	if (ptr->prev == nullptr) {

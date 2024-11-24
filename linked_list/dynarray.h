@@ -15,7 +15,7 @@ class Vector {
  public:
   Vector() {
 	size = 0;
-	const auto DEFAULT_VECTOR_SIZE = 8;
+	const auto DEFAULT_VECTOR_SIZE = 1;
 	capacity = DEFAULT_VECTOR_SIZE;
 	elements = new T[DEFAULT_VECTOR_SIZE];
   }
@@ -110,10 +110,11 @@ class Vector {
 		tmp.pushBack(elements[i]);
 	  }
 	}
-	size++;
-	capacity++;
+
 	delete[] elements;
-	elements = new T[size];
+	size++;
+	capacity = size * 2;
+	elements = new T[capacity];
 	for (int i = 0; i < tmp.size; i++) {
 	  elements[i] = tmp.elements[i];
 	}
